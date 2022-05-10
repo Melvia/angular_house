@@ -1,0 +1,18 @@
+:host > div:nth-child(1) {
+    width: 60vh;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    padding: 20px;
+    background-color: rgba(247, 247, 242, 0.8);
+    -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+        -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+        box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+}
+
+.form-group {
+    display: flex;
+    justify-content: space-between;
+}
