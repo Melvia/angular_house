@@ -11,6 +11,7 @@ import { House } from './house'
 export class AppComponent implements OnInit {
 
   houses: House[]=[];
+  currentHouse: House | undefined;
 
   constructor(private httpService: HttpService){}
 
