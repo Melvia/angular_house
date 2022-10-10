@@ -1,26 +1,22 @@
-<form #myForm="ngForm" novalidate>
+<form [formGroup]="myForm" novalidate>
   <div class="form-group">
     <label> Дом </label>
     <select
       #chosenHouse
-      name="house"
-      ngModel
-      (ngModelChange)="chooseHouse(myForm.controls.house.value?.houseId)"
+      formControlName="house"
+      (change)="chooseHouse(myForm.controls.house.value?.houseId)"
     >
       <option *ngFor="let house of houses" [ngValue]="house">
         {{ house.houseName }}
       </option>
     </select>
   </div>
-  <!-- <p>Form value: {{ myForm.value | json }}</p> -->
+  <p>Form value: {{ myForm.controls.house.value?.houseId }}</p>
 
   <div class="form-group">
     <label>Помещение</label>
-    <select class="form-control" name="apartment" [(ngModel)]="apartment">
-      <option
-        *ngFor="let apartment of apartments"
-        [value]="apartment.apartmentName"
-      >
+    <select class="form-control" name="apartment" formControlName="apartment">
+      <option *ngFor="let apartment of apartments" [ngValue]="apartment">
         {{ myForm.controls.house.value?.houseName }},
         {{ apartment.apartmentName }}
       </option>
@@ -29,10 +25,30 @@
 
   <div class="form-group">
     <label>Проживающий</label>
-    <select class="form-control" name="person" [(ngModel)]="person">
+    <select class="form-control" name="person" formControlName="person">
       <option *ngFor="let person of persons" [value]="person.name">
         {{ person.name }}
       </option>
     </select>
+  </div>
+
+  <div class="ng-autocomplete">
+    <label>Проживающий</label>
+    <ng-autocomplete
+      class="form-control"
+      name="person"
+      formControlName="person"
+    >
+      [data]="persons" [searchKeyword]="name" placeholder="Select person"
+      [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate"
+    </ng-autocomplete>
+
+    <ng-template #itemTemplate let-item>
+      <a [innerHTML]="item.name"></a>
+    </ng-template>
+
+    <ng-template #notFoundTemplate let-notFound>
+      <div [innerHTML]="notFound"></div>
+    </ng-template>
   </div>
 </form>
