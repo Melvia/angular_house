@@ -23,25 +23,69 @@
     </select>
   </div>
 
-  <div class="form-group">
+  <div class="ng-autocomplete">
+    <label>Помещение</label>
+    <ng-autocomplete
+      [data]="apartments"
+      [searchKeyword]="keywordApartments"
+      placeholder="Enter the Country Name"
+      (selected)="selectEvent($event)"
+      (inputChanged)="onChangeSearch($event)"
+      (inputFocused)="onFocused($event)"
+      historyIdentifier="countries"
+      [itemTemplate]="itemTemplateApartments"
+      [notFoundTemplate]="notFoundTemplateApartments"
+    >
+    </ng-autocomplete>
+
+    <ng-template #itemTemplateApartments let-item>
+      <a [innerHTML]="item.name"></a>
+    </ng-template>
+
+    <ng-template #notFoundTemplateApartments let-notFound>
+      <div [innerHTML]="notFound"></div>
+    </ng-template>
+
+    <ng-template #itemTemplate let-item>
+      <a [innerHTML]="item.name"></a>
+    </ng-template>
+
+    <ng-template #notFoundTemplate let-notFound>
+      <div [innerHTML]="notFound"></div>
+    </ng-template>
+  </div>
+
+  <!-- <div class="form-group">
     <label>Проживающий</label>
     <select class="form-control" name="person" formControlName="person">
       <option *ngFor="let person of persons" [value]="person.name">
         {{ person.name }}
       </option>
     </select>
-  </div>
+  </div> -->
 
   <div class="ng-autocomplete">
     <label>Проживающий</label>
     <ng-autocomplete
-      class="form-control"
-      name="person"
-      formControlName="person"
+      [data]="persons"
+      [searchKeyword]="keyword"
+      placeholder="Enter the Country Name"
+      (selected)="selectEvent($event)"
+      (inputChanged)="onChangeSearch($event)"
+      (inputFocused)="onFocused($event)"
+      historyIdentifier="countries"
+      [itemTemplate]="itemTemplate"
+      [notFoundTemplate]="notFoundTemplate"
     >
-      [data]="persons" [searchKeyword]="name" placeholder="Select person"
-      [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate"
     </ng-autocomplete>
+
+    <ng-template #itemTemplate let-item>
+      <a [innerHTML]="item.name"></a>
+    </ng-template>
+
+    <ng-template #notFoundTemplate let-notFound>
+      <div [innerHTML]="notFound"></div>
+    </ng-template>
 
     <ng-template #itemTemplate let-item>
       <a [innerHTML]="item.name"></a>

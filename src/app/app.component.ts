@@ -17,10 +17,8 @@ export class AppComponent implements OnInit {
   houses: House[] = [];
   apartments: Apartment[] = [];
   persons: Person[] = [];
-
-  // house: House | undefined;
-  // apartment: Apartment | undefined;
-  // person: Person | undefined;
+  keywordApartments = 'apartmentName';
+  keyword = 'name';
 
   myForm: FormGroup;
   constructor(private httpService: HttpService) {
