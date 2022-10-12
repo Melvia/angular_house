@@ -42,7 +42,6 @@ export class AppComponent implements OnInit {
       .getApatments(houseId)
       .pipe(
         switchMap((data: Apartment[]) => {
-          console.log(data);
           return (this.apartments = data);
         })
       )
@@ -60,15 +59,33 @@ export class AppComponent implements OnInit {
   }
 
   selectEvent(item) {
+    console.log('selectEvent', this.apartments);
     // do something with selected item
   }
 
   onChangeSearch(val: string) {
+    console.log('onChangeSearch', this.apartments);
     // fetch remote data from here
     // And reassign the 'data' which is binded to 'data' property.
   }
 
   onFocused(e) {
+    // do something when input is focused
+    console.log('onFocused', this.apartments);
+  }
+
+  selectEventApartments(item) {
+    // do something with selected item
+    console.log('selectEventApartments', this.apartments);
+  }
+
+  onChangeSearchApartments(val: string) {
+    console.log('onChangeSearchApartments', this.apartments);
+    // fetch remote data from here
+    // And reassign the 'data' which is binded to 'data' property.
+  }
+
+  onFocusedApartments(e) {
     // do something when input is focused
   }
 }

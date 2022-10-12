@@ -28,18 +28,18 @@
     <ng-autocomplete
       [data]="apartments"
       [searchKeyword]="keywordApartments"
-      placeholder="Enter the Country Name"
-      (selected)="selectEvent($event)"
-      (inputChanged)="onChangeSearch($event)"
-      (inputFocused)="onFocused($event)"
-      historyIdentifier="countries"
+      placeholder="Введите номер помещения"
+      (selected)="selectEventApartments($event)"
+      (inputChanged)="onChangeSearchApartments($event)"
+      (inputFocused)="onFocusedApartments($event)"
+      historyIdentifier="apartments"
       [itemTemplate]="itemTemplateApartments"
       [notFoundTemplate]="notFoundTemplateApartments"
     >
     </ng-autocomplete>
 
     <ng-template #itemTemplateApartments let-item>
-      <a [innerHTML]="item.name"></a>
+      <a [innerHTML]="item.apartmentName"></a>
     </ng-template>
 
     <ng-template #notFoundTemplateApartments let-notFound>
@@ -69,11 +69,11 @@
     <ng-autocomplete
       [data]="persons"
       [searchKeyword]="keyword"
-      placeholder="Enter the Country Name"
+      placeholder="Введите фамилию проживающего"
       (selected)="selectEvent($event)"
       (inputChanged)="onChangeSearch($event)"
       (inputFocused)="onFocused($event)"
-      historyIdentifier="countries"
+      historyIdentifier="persons"
       [itemTemplate]="itemTemplate"
       [notFoundTemplate]="notFoundTemplate"
     >
