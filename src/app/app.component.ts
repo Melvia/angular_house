@@ -5,7 +5,12 @@ import { Apartment } from './apartment';
 import { Person } from './person';
 import { tap, map, switchMap, pluck } from 'rxjs';
 import { NgForm } from '@angular/forms';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  FormBuilder,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -21,12 +26,22 @@ export class AppComponent implements OnInit {
   keyword = 'name';
 
   myForm: FormGroup;
-  constructor(private httpService: HttpService) {
-    this.myForm = new FormGroup({
-      house: new FormControl(null),
-      apartment: new FormControl(),
-      person: new FormControl(),
+  constructor(private httpService: HttpService, private fb: FormBuilder) {
+    this.myForm = this.fb.group({
+      house: null,
+      apartment: null,
+      person: null,
     });
+  }
+
+  get houseName() {
+    return this.myForm.controls.house?.value?.houseName;
+  }
+  get fullApartment() {
+    return this.apartments.map((apartment) => ({
+      ...apartment,
+      apartmentName: `${this.houseName} ${apartment.apartmentName}`,
+    }));
   }
 
   ngOnInit() {
@@ -37,7 +52,6 @@ export class AppComponent implements OnInit {
   }
 
   chooseHouse(houseId: number | undefined) {
-    console.log('houseId', houseId);
     this.httpService
       .getApatments(houseId)
       .pipe(
@@ -71,16 +85,13 @@ export class AppComponent implements OnInit {
 
   onFocused(e) {
     // do something when input is focused
-    console.log('onFocused', this.apartments);
   }
 
   selectEventApartments(item) {
     // do something with selected item
-    console.log('selectEventApartments', this.apartments);
   }
 
   onChangeSearchApartments(val: string) {
-    console.log('onChangeSearchApartments', this.apartments);
     // fetch remote data from here
     // And reassign the 'data' which is binded to 'data' property.
   }
